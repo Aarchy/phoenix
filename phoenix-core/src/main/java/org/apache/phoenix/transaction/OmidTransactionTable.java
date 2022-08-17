@@ -123,8 +123,8 @@ public class OmidTransactionTable extends CompatOmidTransactionTable implements 
     }
 
     @Override
-    public HTableDescriptor getTableDescriptor() throws IOException {
-        return tTable.getTableDescriptor();
+    public TableDescriptor getDescriptor() throws IOException {
+        return tTable.getDescriptor();
     }
 
     @Override
@@ -317,11 +317,6 @@ public class OmidTransactionTable extends CompatOmidTransactionTable implements 
 
     @Override
     public void setReadRpcTimeout(int readRpcTimeout) {
-        throw new UnsupportedOperationException();
-    }
-
-    @Override
-    public TableDescriptor getDescriptor() throws IOException {
         throw new UnsupportedOperationException();
     }
 

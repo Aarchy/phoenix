@@ -1013,7 +1013,7 @@ public class AlterTableWithViewsIT extends SplitSystemCatalogIT {
             PName tenantId = isMultiTenant ? PNameFactory.newName(TENANT1) : null;
             PhoenixConnection phoenixConn = conn.unwrap(PhoenixConnection.class);
             Table htable = phoenixConn.getQueryServices().getTable(Bytes.toBytes(baseTableName));
-            assertFalse(htable.getTableDescriptor().getCoprocessors().contains(TephraTransactionalProcessor.class.getName()));
+            assertFalse(htable.getDescriptor().getCoprocessors().contains(TephraTransactionalProcessor.class.getName()));
             assertFalse(phoenixConn.getTable(new PTableKey(null, baseTableName)).isTransactional());
             assertFalse(viewConn.unwrap(PhoenixConnection.class).getTable(new PTableKey(tenantId, viewOfTable)).isTransactional());
             
@@ -1023,7 +1023,7 @@ public class AlterTableWithViewsIT extends SplitSystemCatalogIT {
             // query the view to force the table cache to be updated
             viewConn.createStatement().execute("SELECT * FROM " + viewOfTable);
             htable = phoenixConn.getQueryServices().getTable(Bytes.toBytes(baseTableName));
-            assertTrue(htable.getTableDescriptor().getCoprocessors().contains(TephraTransactionalProcessor.class.getName()));
+            assertTrue(htable.getDescriptor().getCoprocessors().contains(TephraTransactionalProcessor.class.getName()));
             assertTrue(phoenixConn.getTable(new PTableKey(null, baseTableName)).isTransactional());
             assertTrue(viewConn.unwrap(PhoenixConnection.class).getTable(new PTableKey(tenantId, viewOfTable)).isTransactional());
         } 

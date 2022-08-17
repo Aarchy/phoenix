@@ -68,7 +68,7 @@ public class SystemCatalogRegionObserverIT extends BaseTest {
             Table syscatTable = phoenixConn.getQueryServices().getTable(
                 SchemaUtil.getPhysicalTableName(PhoenixDatabaseMetaData.SYSTEM_CATALOG_NAME_BYTES, true).getName());
             assertTrue("SystemCatalogRegionObserver was not added to SYSTEM.CATALOG",
-                syscatTable.getTableDescriptor().getCoprocessors().contains(
+                syscatTable.getDescriptor().getCoprocessors().contains(
                 SystemCatalogRegionObserver.class.getName()));
         }
     }
